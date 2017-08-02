@@ -1,0 +1,51 @@
+Q5 grep " " text.txt
+
+a) ^#
+b) [^#]
+c) [BHLP]arry or more generally \.arry
+d)
+f) c[ae]l[ae]nd[ae]r
+g)
+h) ^\n$
+
+Q6
+
+a) pipe symbol
+b) arrow symbols for redirection
+c) grep can't do this, egrep can
+d) need quotes around the argument
+e)
+
+Q7
+
+a) 4, 4
+b) Pl, infinite
+c) 10
+d) 4 digit number
+e)
+
+
+
+Q10
+
+egrep "129\.94\.172\.(2[0-5]|1[0-9]|[1-9]" ips.txt
+
+
+
+Q11
+
+a)
+
+b) egrep "^[0-9]+\.?[0-9]*" q11b.txt
+
+c)
+
+
+
+Q12
+
+a)i) sort -n marks.txt
+a)ii) sort -k 2 marks.txt
+a)iii) sort -k 2 -r marks.txt
+
+b)ii) egrep "[0-9]+ 9[0-9]"
