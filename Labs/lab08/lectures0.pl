@@ -2,22 +2,46 @@
 
 use strict;
 
+my @times = ();
 
 foreach my $courseCode (@ARGV) {
 
-	my $hyperlink = "http://timetable.unsw.edu.au/2017/${courseCode}.html";
+	my $url = "http://timetable.unsw.edu.au/2017/${courseCode}.html";
+	
+	open WEBPAGE, '-|', "wget -q -O- $url" or die "Can not open webpage for $courseCode\n";
 
-	my $webpage = `wget -q -O- $hyperlink`;
+	while (my $line = <WEBPAGE>) {
 
-	$webpage =~ /<td class="data">Lecture<\/td>/;
+		if ($line =~ /.*"(#(S[12])-[0-9]{4})">Lecture<\/a><\/td>/) {
 
-	print "$webpage";
+			my $semester = $line;
+			my $classNum = $line;
+			$semester =~ s/^.*#//g;
+			$semester =~ s/-.*//g;
+			$semester =~ s/\n//g;
 
+			$classNum =~ s/^.*-//g;
+			$classNum =~ s/\">.*//g;
+			$classNum =~ s/\n//g;
 
+			my $count = 0;
+			my $newLine;
+			while ($count <= 5) {
+				$newLine = <WEBPAGE>;
+				$count++;
+			}
+
+			if (!($newLine =~ /<td class="data"><\/td>/)) {
+				$newLine =~ s/^\s+//g;
+				$newLine =~ s/.*data">//g;
+				$newLine =~ s/<\/td>//g;
+
+				if (!(grep $_ eq $newLine, @times)) {
+					push @times, $newLine;
+					print "$courseCode: $semester $newLine";
+				}
+			}
+		}
+	}
+	close WEBPAGE; 
 }
-
-
-
-
-# https://github.com/SamanthaChhoeu/COMP2041-16s2/blob/master/lab08/lectures0.pl
-# https://github.com/naak19/COMP2041/blob/master/2041-labs/lab08/lectures0.pl
