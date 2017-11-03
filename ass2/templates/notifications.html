@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+
+{% block body_contents %}
+
+<center>
+
+
+<div class="nav">
+	<Form method="POST">
+		<button type="submit" name="home" style="width: 100px; height: 30px;">Dashboard</button>
+		<button type="submit" name="profile" style="width: 100px; height: 30px;">Profile</button>
+		<button type="submit" name="notifications" style="width: 100px; height: 30px;">Notifications</button>
+		<input placeholder="Search" name="query" style="width: 200px; height: 25px;"/>
+		<button type="submit" name="search" style="width: 30px; height: 30px;">?</button>
+		<button type="submit" name="log_out" style="width: 100px; height: 30px;">Log out</button>
+
+
+	</Form>
+</div>
+
+
+
+<div class="container">
+
+	<h2>Friend Requests</h2>
+	{% if friends_requests %}
+		{% for request in friends_requests %}
+			{{request[1]}}
+			<Form method="POST">
+				<button type="submit" name="{{ request[0] }}" style="width: 100px; height: 30px;">Approve</button>
+			</Form>
+		{% endfor %}
+	{% endif %}
+
+
+</div>
+</center>
+{% endblock %}

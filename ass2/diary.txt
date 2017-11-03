@@ -1,2 +1,19 @@
 16/10/17	10:15	10:30	Ass2 Setup: using Python/Flask
-16/10/17	10:30	10:45	Remote set up on laptop
+16/10/17	10:30	10:45	Remote setup
+16/10/17	10:45	11:00	Add dataset and examine given files/code
+17/10/17	08:20	08:45	Test reading in lines from file
+18/10/17	08:00	08:30	Finish reading in student.txt file
+
+27/10/17	10:00	14:30	Database design + schema
+27/10/17	14:30	15:30	Begin storing data from dataset into database
+27/10/17	15:30	17:00	Storing student.txt finished
+27/10/17	17:00	17:45	Begin reading in posts/comments/replies
+
+29/10/17	20:30	22:00	Add user management and determine to-do list
+
+30/10/17	08:30	09:15	Friends list, recent post fix
+30/10/17	12:00	13:30	Search, other profiles
+30/10/17	17:00	17:45	Work on reading in comments/replies
+30/10/17	18:30	20:15	Fix and finish database implementation
+31/10/17	09:00	16:00	Nav bar, posts/comments/replies, link to profile, make posts
+							friend/unfriend, friend suggestions fix, profile pics, update profile

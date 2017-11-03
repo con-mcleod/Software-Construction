@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+
+{% block body_contents %}
+
+<center>
+
+
+<div class="nav">
+	<Form method="POST">
+		<button type="submit" name="home" style="width: 100px; height: 30px;">Dashboard</button>
+		<button type="submit" name="profile" style="width: 100px; height: 30px;">Profile</button>
+		<button type="submit" name="notifications" style="width: 100px; height: 30px;">Notifications</button>
+		<input placeholder="Search" name="query" style="width: 200px; height: 25px;"/>
+		<button type="submit" name="search" style="width: 30px; height: 30px;">?</button>
+		<button type="submit" name="log_out" style="width: 100px; height: 30px;">Log out</button>
+
+	</Form>
+</div>
+
+
+<div class="container">
+
+	{% if details %}
+		{% for detail in details %}
+			<br>
+			<img src="../static/profile_pics/{{zid}}.jpg" height="20%" width="20%">
+			<br>
+			<i>{{ detail[4] }}</i>
+			<br><br><br>
+			{{ detail[0] }}
+			<br>
+			{{ detail[1] }}
+			<br>
+			{{ detail[2] }}
+			<br>
+			{{ detail[3] }}
+			<br>
+		{% endfor %}
+	{% endif %}
+
+<Form method="POST">
+{% if current_friends %}
+	<br>
+	<button type="submit" name="delete" style="width: 200px; height: 30px; background-color: #ff4d4d">Delete Friend</button>
+{% elif requested_friend %}
+	<br>
+	<button type="submit" name="cancel_request" style="width: 200px; height: 30px; background-color: #ff4d4d">Cancel Friend Request</button>
+{% else %}
+	<br>
+	<button type="submit" name="request_friend" style="width: 200px; height: 30px; background-color: #ffeecc">Add Friend</button>
+{% endif %}
+</Form>
+
+</div>
+</center>
+
+{% endblock %}

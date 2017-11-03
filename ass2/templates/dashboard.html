@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+
+
+{% block body_contents %}
+
+<center>
+
+
+<div class="nav">
+	<Form method="POST">
+		<button type="submit" name="home" style="width: 100px; height: 30px;">Dashboard</button>
+		<button type="submit" name="profile" style="width: 100px; height: 30px;">Profile</button>
+		<button type="submit" name="notifications" style="width: 100px; height: 30px;">Notifications</button>
+		<input placeholder="Search" name="query" style="width: 200px; height: 25px;"/>
+		<button type="submit" name="search" style="width: 30px; height: 30px;">?</button>
+		<button type="submit" name="log_out" style="width: 100px; height: 30px;">Log out</button>
+
+
+	</Form>
+</div>
+
+<div class="container">
+
+	<h2>Your Storkers</h2>
+	{% if friends %}
+		{% for friend in friends %}
+			<Form method="POST">
+				<button type="submit" name="{{friend[0]}}">{{friend[0]}}</button>
+			</Form>
+		{% endfor %}
+	{% endif %}
+
+	<h2>Suggested Storkers</h2>
+	{% if sugg_friends %}
+		{% for friend in sugg_friends %}
+			<Form method="POST">
+				<button type="submit" name="{{friend}}">{{friend}}</button>
+			</Form>
+		{% endfor %}
+	{% endif %}
+
+	<br><br><br>
+	<h2>Your Recent Storks</h2>
+
+	<Form method="POST">
+		<input placeholder="What's on your mind?" name="newstork" style="text-align: center; width: 200px; height: 20px;"/>
+		<br>
+		<button type="submit" name="new_post">Stork it!</button>
+	</Form>
+
+	<br><br>
+	{% if posts %}
+		{% for post in posts %}
+		<div class="post" style="border-style: dotted; border-width: 1px; border-color: orange">
+			<div class="actual_post" style="background-color: #ffeecc;">
+				<Form method="POST">
+					<button type="submit" name="{{post[0]}}">{{post[0]}}</button>
+				</Form>
+				<div class="comment" style="font-size:12px;">
+				{{ post[2] }}
+				</div>
+				<br>			
+					{{ post[1] }}
+				<br><br>
+			</div>
+			{% if comments %}
+				{% for comment in comments %}
+					{% for x in comment %}
+						{% if x[1] == post[3] %}
+							<br>
+							<Form method="POST">
+								<button type="submit" name="{{x[2]}}">{{x[2]}}</button>
+							</Form>
+							<div class="comment" style="font-size:12px;">{{x[3]}}</div>
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endif %}
+			<br><br>
+		</div>
+		{% endfor %}
+	{% endif %}
+	
+
+	<br><br><br>
+	<h2>Recent Friend Posts</h2>
+	{% if friends_posts %}
+		{% for friend in friends_posts %}
+			{% for post in friend %}
+			<div class="post" style="border-style: dotted; border-width: 1px; border-color: orange">
+				<div class="actual_post" style="background-color: #f3f3f3;">
+					<Form method="POST">
+						<button type="submit" name="{{post[0]}}">{{post[0]}}</button>
+					</Form> 
+					<div class="comment" style="font-size:12px;">{{ post[2] }}</div>
+					<br>
+					{{ post[1] }}
+				</div>
+				{% if friends_comments %}
+					{% for comment in friends_comments %}
+						{% for x in comment %}
+							{% if x[1] == post[3] %}
+								<br>
+								<Form method="POST">
+									<button type="submit" name="{{x[2]}}">{{x[2]}}</button>
+								</Form>
+								<div class="comment" style="font-size:12px;">{{x[3]}}</div>
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+				<br>
+				{% endif %}
+			</div>
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
+
+
+</div>
+</center>
+{% endblock %}
